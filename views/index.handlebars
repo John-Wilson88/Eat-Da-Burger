@@ -1,0 +1,91 @@
+<h1> Eat Da Burger! </h1>
+
+<div id="uneaten">
+	<h3> uneaten Burgers </h3>
+	<ul>
+		{{#each burgers}}
+			{{#unless devoured}}
+				{{> burger-partial devoured=false}}
+			{{/unless}}
+		{{/each}}
+	</ul>
+</div>
+
+<div id="eaten">
+	<h3> eaten Burgers </h3>
+	<ul>
+		{{#each burgers}}
+			{{#if devoured}}
+				{{> burger-partial devoured=true}}
+			{{/if}}
+		{{/each}}
+	</ul>
+</div>
+
+<br>
+<hr>
+<br>
+
+<h3> New Burger </h3>
+<form class="createNew">
+	
+	<div class="form-group">
+		<label for="newBurg"> Burger Name </label>
+		<input type="text" id="newBurg" name="burgerType">
+	</div>
+
+	<button type="submit"> Order </button>
+</form>
+
+
+<script type="text/javascript">
+	
+
+$("#dev").on("click", function(event){
+	var id = $(this).data("id");
+	var newDev = $(this).data("devoured");
+
+	var newDevState = {
+		devoured: newDev
+	};
+
+
+	$.ajax("/api/burger/" + id, {
+		type: "PUT",
+		data: newDevState
+	}).then(function(){
+		console.log(ID + "devoured state changed to " + newDev);
+
+		location.reload();
+	});
+});
+
+$(".createNew").on("submit", function(event){
+	event.preventDefault();
+
+	var newBurger = {
+		burger_name: $("#newBurg").val().trim()
+	};
+
+	$.ajax("/api/burgers", {
+		type: "POST",
+		data: newBurger
+	}).then(function(){
+		console.log("new Burger Added");
+
+		loaction.reload();
+	});
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
