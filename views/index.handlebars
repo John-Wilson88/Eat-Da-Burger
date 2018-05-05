@@ -41,12 +41,13 @@
 <script type="text/javascript">
 	
 
-$("#dev").on("click", function(event){
+$(".dev").on("click", function(event){
 	var id = $(this).data("id");
+	console.log(id);
 	var newDev = $(this).data("devoured");
 
 	var newDevState = {
-		devoured: newDev
+		devoured: 1
 	};
 
 
@@ -54,7 +55,7 @@ $("#dev").on("click", function(event){
 		type: "PUT",
 		data: newDevState
 	}).then(function(){
-		console.log(ID + "devoured state changed to " + newDev);
+		console.log(id + "devoured state changed to " + newDev);
 
 		location.reload();
 	});
@@ -73,7 +74,7 @@ $(".createNew").on("submit", function(event){
 	}).then(function(){
 		console.log("new Burger Added");
 
-		loaction.reload();
+		location.reload();
 	});
 });
 

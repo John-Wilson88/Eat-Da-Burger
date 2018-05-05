@@ -2,6 +2,7 @@ $(function() {
 
 $(".dev").on("click", function(event){
 	var id = $(this).data("id");
+	console.log(id);
 	var newDev = $(this).data("devoured");
 
 	var newDevState = {
@@ -22,7 +23,7 @@ $(".dev").on("click", function(event){
 $(".createNew").on("submit", function(event){
 	event.preventDefault();
 
-	var newBurger {
+	var newBurger = {
 		burger_name: $("#newBurg").val().trim()
 	};
 
@@ -32,7 +33,7 @@ $(".createNew").on("submit", function(event){
 	}).then(function(){
 		console.log("new Burger Added");
 
-		loaction.reload();
+		location.reload();
 	});
 });
 
